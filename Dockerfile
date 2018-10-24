@@ -1,6 +1,5 @@
-FROM japaric/armv7-unknown-linux-gnueabihf:v0.1.14
+FROM parity/rust-arm:gitlab-ci
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    libudev-dev \
-    libsqlite3-dev
+    libsqlite3-dev libsqlite3-dev:armhf
