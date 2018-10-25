@@ -30,4 +30,5 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     libudev-dev:armhf \
     libsqlite3-dev:armhf \
-	libudev-dev libsqlite3-dev
+	libudev-dev libsqlite3-dev \
+	libssl-dev 
