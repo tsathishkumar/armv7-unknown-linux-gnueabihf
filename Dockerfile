@@ -31,4 +31,18 @@ RUN apt-get update && \
     libudev-dev:armhf \
     libsqlite3-dev:armhf \
 	libudev-dev libsqlite3-dev \
-	libssl-dev 
+	libssl-dev pkg-config curl
+
+ENV OS_COMPILER linux-armv4
+ENV AR arm-linux-gnueabihf-ar
+ENV CC arm-linux-gnueabihf-gcc
+ENV HOME /root
+RUN curl -O https://www.openssl.org/source/openssl-1.0.2n.tar.gz && \
+  tar xf openssl-1.0.2n.tar.gz && cd openssl-1.0.2n && \
+  ./Configure --prefix=${HOME}/openssl ${OS_COMPILER} -fPIC && \
+  make && make install && \
+  cd .. &&rm -rf openssl-*
+# set cross compile ENV
+ENV OPENSSL_DIR "/root/openssl"
+ENV CPPFLAGS "-I/usr/include"
+ENV LDFLAGS "-L/usr/lib/arm-linix-gnueabihf"	
